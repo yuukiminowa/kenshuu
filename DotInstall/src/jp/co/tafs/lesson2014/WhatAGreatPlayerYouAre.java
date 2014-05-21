@@ -4,27 +4,28 @@ import java.util.*;
 class GameMachine{
 	private String hardware ="PlayStation3"; 	//ハードウェア
 	private String maker="Sony";				//メーカー
-	private String netConnect="有り";			//ネット接続の有無
-	private String salesDate="2006/11/11";		//発売日
+	private boolean netConnect=false;			//ネット接続の有無
+	private String umu;							//ネット接続の有無（日本語変換）
+	private Date salesDate = dateInstance(2006,4,1) ;	//発売日
 	private int price=60000;					//価格
 	private String activeSoftware;				//アクティブなゲーム名 初期値はNULL
 	private boolean powerFlag=false;			//電源のON/OFF ONならtrue OFFならfalse
 	private boolean softwareFlag=false;			//ゲームソフトの有無 入っているならtrue 入っていないならfalse
 	
 	
+	
 	//ゲームで遊んでいるとき呼び出すメソッド
 	 void playGamesoft(){
 		 if(activeSoftware!=null){
-			 System.out.println(activeSoftware);
-			 System.out.println("playing!!");
+			 System.out.println("今"+activeSoftware+"で遊んでるよ");
 		 }
 		 else{
-			 System.out.println("not playing↓↓");
+			 System.out.println("全然遊んでないよ。たまには遊びなよ");
 			 
 		 }
 	}
 	 //setterメソッド ゲーム機情報をセット
-	 public void setGameMachine(String hardware,String maker,String netConnect,String salesDate,int price){
+	 public void setGameMachine(String hardware,String maker,boolean netConnect,Date salesDate,int price){
 		 this.hardware=hardware;
 		 this.maker=maker;
 		 this.netConnect=netConnect;
@@ -43,11 +44,17 @@ class GameMachine{
 	}
 	 //getterメソッド ネット接続の有無
 	 public String getNetConnect(){
-			return netConnect;
+		 	if(netConnect==false){
+		 		 umu="無し";
+		 	}
+		 	else{
+		 		 umu="有り";
+		 	}
+			return umu;
 			 
 	}
 	 //getterメソッド 発売日
-	 public String getSalesDate(){
+	 public Date getSalesDate(){
 			return salesDate;
 			 
 	}
@@ -96,7 +103,18 @@ class GameMachine{
 	 public void setActiveSoftware(String gameSoft){
 		 activeSoftware=gameSoft;
 	 }
-	 
+	 Date dateInstance(int year,int month , int day){
+		 Calendar calendar = Calendar.getInstance();
+			calendar.set(Calendar.YEAR, year);
+			calendar.set(Calendar.MONTH, month);
+			calendar.set(Calendar.DAY_OF_MONTH, day);
+			calendar.set(Calendar.HOUR, 0);
+			calendar.set(Calendar.MINUTE, 0);
+			calendar.set(Calendar.SECOND, 0);
+			calendar.set(Calendar.MILLISECOND, 0);
+
+			return calendar.getTime();
+	 }
 
 }
 //新ゲーム機クラス
@@ -129,12 +147,8 @@ class NewGameMachine extends GameMachine{
 	}
 
 //インストールしたゲームソフトの一覧表示
-	 void gameList(){
-		 System.out.println("------ゲーム一覧-------");
-		 for (int i=0;i<installGame.size();i++){
-			 System.out.println(installGame.get(i));
-		 }
-		 System.out.println("-------ここまで--------");
+	 List<String> gameList(){
+		 return this.installGame;
 	}
 //ゲームを選んでアクティブにする
 	void selectGame(String gameSoft){
@@ -155,7 +169,7 @@ class NewGameMachine extends GameMachine{
 public class WhatAGreatPlayerYouAre{
 	public static void main(String[] args) {
 		GameMachine playstation3 = new GameMachine();
-		playstation3.setGameMachine("NINTENDO64", "NINTENDO", "無し", "1996/06/23",20000);
+		playstation3.setGameMachine("NINTENDO64", "NINTENDO",false, playstation3.dateInstance(1996,6,23),20000);
 		
 		System.out.println("ゲーム機情報：" +
 				"現在のハードは"+playstation3.getHardware()+"\tメーカーは"+playstation3.getMaker()+"\tネット接続は"+playstation3.getNetConnect()+"\t発売日は"+playstation3.getSalesDate()+"\t価格は"+playstation3.getPrice()+"だよ");
@@ -168,12 +182,12 @@ public class WhatAGreatPlayerYouAre{
 		}
 		playstation3.playGamesoft();
 		
-		System.out.println("最高ー！！");
+		System.out.println("感想？最高ー！！");
 		
 		
 		
 		NewGameMachine playstation4=new NewGameMachine();
-		playstation4.setGameMachine("PlayStation4", "Sony", "有りまくり","2014/2/22",40000);
+		playstation4.setGameMachine("PlayStation4", "Sony", true, playstation4.dateInstance(2014,2,22),40000);
 		System.out.println("ゲーム機情報：" +
 				"現在のハードは"+playstation4.getHardware()+"\tメーカーは"+playstation4.getMaker()+"\tネット接続は"+playstation4.getNetConnect()+"\t発売日は"+playstation4.getSalesDate()+"\t価格は"+playstation4.getPrice()+"だよ");
 		if(playstation4.getPowerStatus()==false){
@@ -184,11 +198,17 @@ public class WhatAGreatPlayerYouAre{
 		playstation4.setSoftware("FF14");
 		playstation4.setSoftware("ウィニングイレブン");
 		playstation4.setSoftware("メタルギア");
-		playstation4.gameList();
+		List <String> game =playstation4.gameList();
+		 System.out.println("------ゲーム一覧-------");
+		 for (int i=0;i<game.size();i++){
+			 System.out.println(i+1+":"+game.get(i));
+		 }
+		 System.out.println("-------ここまで--------");
+
 		playstation4.selectGame(playstation4.installGame.get(1));
 		playstation4.playGamesoft();
 		
-		System.out.println("微妙↓↓");
+		System.out.println("感想？微妙↓↓");
 	}
 	
 }
