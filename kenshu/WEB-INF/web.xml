@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+		version="2.4">
+	
+	<!-- 
+		web.xmlは、ウェブシステムを設定を記述するためのファイルです。
+		JavaのWebシステムの仕様で、かならずWEB-INFの下に配置するという約束になっています。
+	 -->
+	<servlet>
+		<!--
+			servletタグで、作成したクラスを、TomcatにServletクラスとして登録します。
+			そのときに、サーブレットに名前をsarvlet-nameタグでつけます。
+		-->
+		<servlet-name>gamelist</servlet-name>
+		<servlet-class>jp.co.tafs.kenshu.GameListServlet</servlet-class>
+		
+		<init-param>
+			<param-name>javaEncoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<!--
+			servlet-mappingタグで、うえで名前をつけたservletに
+			呼び出すときにURLを設定します。
+		-->
+		<servlet-name>gamelist</servlet-name>
+		<url-pattern>/game/list</url-pattern>
+	</servlet-mapping>
+
+</web-app>
