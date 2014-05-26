@@ -17,6 +17,21 @@
 		<servlet-name>gamelist</servlet-name>
 		<servlet-class>jp.co.tafs.kenshu.GameListServlet</servlet-class>
 		
+		
+		<init-param>
+			<param-name>javaEncoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</servlet>
+		<servlet>
+		<!--
+			servletタグで、作成したクラスを、TomcatにServletクラスとして登録します。
+			そのときに、サーブレットに名前をsarvlet-nameタグでつけます。
+		-->
+		<servlet-name>deleteGame</servlet-name>
+		<servlet-class>jp.co.tafs.kenshu.GameDeleteServlet</servlet-class>
+		
+		
 		<init-param>
 			<param-name>javaEncoding</param-name>
 			<param-value>UTF-8</param-value>
@@ -29,6 +44,19 @@
 		-->
 		<servlet-name>gamelist</servlet-name>
 		<url-pattern>/game/list</url-pattern>
+	
 	</servlet-mapping>
+	
+		
+	<servlet-mapping>
+		<!--
+			servlet-mappingタグで、うえで名前をつけたservletに
+			呼び出すときにURLを設定します。
+		-->
+		<servlet-name>deleteGame</servlet-name>
+		<url-pattern>/game/del</url-pattern>
+	
+	</servlet-mapping>
+
 
 </web-app>

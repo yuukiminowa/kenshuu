@@ -7,6 +7,7 @@ import jp.co.tafs.kenshu.game.GameSearchConditionBean;
 import jp.co.tafs.kenshu.game.GameBean;
 import jp.co.tafs.kenshu.*;
 import java.util.*;
+import javax.servlet.http.*;
 
 public final class gemelist_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -61,6 +62,7 @@ public final class gemelist_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
+      out.write("\r\n");
 /* 下の<jsp:useBean ...>の行は、
      GameSearchConditionBean conditionBean = request.getAttribute("conditionBean");
      ArrayList gameList = (ArrayList)request.getAttribute("gameList");
@@ -86,6 +88,28 @@ public final class gemelist_jsp extends org.apache.jasper.runtime.HttpJspBase
           _jspx_page_context.setAttribute("gameList", gameList, PageContext.REQUEST_SCOPE);
         }
       }
+      out.write('\r');
+      out.write('\n');
+      java.util.ArrayList kensuCount = null;
+      synchronized (request) {
+        kensuCount = (java.util.ArrayList) _jspx_page_context.getAttribute("kensuCount", PageContext.REQUEST_SCOPE);
+        if (kensuCount == null){
+          kensuCount = new java.util.ArrayList();
+          _jspx_page_context.setAttribute("kensuCount", kensuCount, PageContext.REQUEST_SCOPE);
+        }
+      }
+      out.write('\r');
+      out.write('\n');
+      java.util.ArrayList gameTitle = null;
+      synchronized (request) {
+        gameTitle = (java.util.ArrayList) _jspx_page_context.getAttribute("gameTitle", PageContext.REQUEST_SCOPE);
+        if (gameTitle == null){
+          gameTitle = new java.util.ArrayList();
+          _jspx_page_context.setAttribute("gameTitle", gameTitle, PageContext.REQUEST_SCOPE);
+        }
+      }
+      out.write('\r');
+      out.write('\n');
       out.write("\r\n");
       out.write("<html>\r\n");
       out.write("\t<head>\r\n");
@@ -116,6 +140,7 @@ public final class gemelist_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t function kakunin(){\r\n");
       out.write("\t\t\t\r\n");
       out.write("\t\t\t if(window.confirm(\"本当に実行していいんですか？後悔しないでくださいよ？\")){\r\n");
+      out.write("\t\t\t\t \r\n");
       out.write("\t\t\t\t return true;\r\n");
       out.write("\t\t\t }\r\n");
       out.write("\t\t\t else{\r\n");
@@ -134,6 +159,18 @@ public final class gemelist_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t}\r\n");
       out.write("\t\t\t\r\n");
       out.write("\t }\r\n");
+      out.write("\t\tfunction deleteKakunin(){\r\n");
+      out.write("\t\t\tif(window.confirm(\"消すの？\")){\r\n");
+      out.write("\t\t\t\r\n");
+      out.write("\t\t\t\t return true;\r\n");
+      out.write("\t\t\t }\r\n");
+      out.write("\t\t\t else{\r\n");
+      out.write("\t\t\t\t return false;\r\n");
+      out.write("\t\t\t } \r\n");
+      out.write("\t\t}\r\n");
+      out.write("\t\t\r\n");
+      out.write("\t\t\r\n");
+      out.write("\t\t\r\n");
       out.write("\t\t</script>\r\n");
       out.write("\t</head>\r\n");
       out.write("\t<body>\r\n");
@@ -180,15 +217,46 @@ if(request.getAttribute("message")!=null) request.getAttribute("message");
 if(request.getAttribute("error")!=null) request.getAttribute("error") ;
       out.write("</p>\r\n");
       out.write("\t\t<hr>\r\n");
+      out.write("\t\t\r\n");
+      out.write("\t\t");
+List<GameBean> dummyCount = new ArrayList<GameBean>();
+			for (int i=0;i<kensuCount.size();i++){
+      out.write("\r\n");
+      out.write("\t\t\t");
+	dummyCount.add((GameBean)kensuCount.get(i));
+      out.write("\r\n");
+      out.write("\t\t\t<p>");
+      out.print("検索件数："+ dummyCount.get(i).getKensu()+"件" );
+      out.write("</p>\r\n");
+      out.write("\t\t\t");
+}
+      out.write(" \r\n");
+      out.write("\t\t\t\r\n");
+      out.write("\t\t");
+System.out.println("aaa"+gameTitle.size()); 
+      out.write("\t\r\n");
+      out.write("\t\t");
+ List<GameBean> dummy2 = new ArrayList<GameBean>();
+		for (int i=0;i<gameTitle.size();i++){
+		dummy2.add((GameBean)gameTitle.get(i));
+		System.out.println(dummy2.get(i).getGameTitle());
+		
+      out.write("\r\n");
+      out.write("\t\t<p>");
+      out.print(dummy2.get(i).getGameTitle()+"を削除しました" );
+      out.write(" </p>\r\n");
+      out.write("\t\t");
+}
+      out.write("\r\n");
       out.write("\t\t<table class=\"float-left\">\r\n");
       out.write("\t\t\r\n");
       out.write("\t\t\t<caption>ゲームマスタ一覧</caption>\r\n");
       out.write("\t\t\t<tr>\r\n");
-      out.write("\t\t\t\t<th>No</th><th>ゲームタイトル</th><th>ハードウェア</th><th>感想</th>\r\n");
+      out.write("\t\t\t\t<th>No</th><th>ゲームタイトル</th><th>ハードウェア</th><th>感想</th><th>キャラクター数</th><th></th>\r\n");
       out.write("\t\t\t</tr>\r\n");
       out.write("\t\t\t");
 List<GameBean> dummy = new ArrayList<GameBean>();
-			List <String>sp=new ArrayList <String>();
+		
 			for(int i = 0 ; i < gameList.size();i++){ 
       out.write(" \r\n");
       out.write("\t\t\t");
@@ -207,7 +275,7 @@ List<GameBean> dummy = new ArrayList<GameBean>();
       out.write("\r\n");
       out.write("\t\t\t\t<tr>\r\n");
       out.write("\t\t\t\t\t<td>");
-      out.print(i+1 );
+      out.print(dummy.get(i).getGameId() );
       out.write("</td>\r\n");
       out.write("\t\t\t\t\t<td>");
       out.print(dummy.get(i).getGameTitle() );
@@ -218,11 +286,21 @@ List<GameBean> dummy = new ArrayList<GameBean>();
       out.write("\t\t\t\t\t<td>");
       out.print(dummy.get(i).getImpression());
       out.write("</td>\r\n");
+      out.write("\t\t\t\t\t<td>");
+      out.print(dummy.get(i).getCharaKensu());
+      out.write("</td>\r\n");
+      out.write("\t\t\t\t\t<td><form id=\"deleteColumn\" method=\"post\" action=\"del\" name=\"deleteColumn\"><input type=\"submit\" value=\"削除\" onClick=\"return deleteKakunin();\"><input type=\"hidden\" name=\"date\" value=");
+      out.print( dummy.get(i).getGameId() );
+      out.write(">\r\n");
+      out.write("\t\t\t\t\t</form></td>\r\n");
       out.write("\t\t\t\t</tr>\r\n");
       out.write("\t\t\t");
 } 
       out.write("\r\n");
       out.write("\t\t</table>\r\n");
+      out.write("\t\r\n");
+      out.write("\r\n");
+      out.write("\t\t\r\n");
       out.write("\t\t<div class=\"float-left\" style=\"width:500px;margin-top:50px;margin-left:50px\">\r\n");
       out.write("\t\t\t課題１\r\n");
       out.write("\t\t\t<ol>\r\n");

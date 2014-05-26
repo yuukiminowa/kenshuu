@@ -14,7 +14,7 @@ public class GameBean {
 	/**
 	 * ゲームID 
 	 */
-	private String gameId;
+	private int  gameId;
 
 	/**
 	 * ゲームタイトル
@@ -34,19 +34,21 @@ public class GameBean {
 	/**
 	 * カウント
 	 */
-	private String kensu;
+	private int kensu;
+	
+	private int charaKensu;
 	
 	/**
 	 * @return gameId
 	 */
-	public String getGameId() {
+	public int getGameId() {
 		return gameId;
 	}
 
 	/**
 	 * @param gameId セットする gameId
 	 */
-	public void setGameId(String gameId) {
+	public void setGameId(int gameId) {
 		this.gameId = gameId;
 	}
 
@@ -92,11 +94,18 @@ public class GameBean {
 		this.impression = impression;
 	}
 	
-	public void setKensu(String kensu) {
+	public void setKensu(int kensu) {
 		this.kensu=kensu;
 	}
-	public String getKensu() {
+	public int getKensu() {
 		return kensu;
+	}
+	
+	public void setCharaKensu(int charaKensu){
+		this.charaKensu=charaKensu;
+	}
+	public int getCharaKensu(){
+		return charaKensu;
 	}
 
 }
