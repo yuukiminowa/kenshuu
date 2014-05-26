@@ -1,5 +1,7 @@
 package jp.co.tafs.kenshu.game;
 
+
+
 /**
  * ゲーム検索条件Bean
  * 
@@ -17,8 +19,13 @@ public class GameSearchConditionBean {
 	 * ハードウェア
 	 */
 	private String hardware = "";
-
 	
+	
+	private String deleteGameTitle = "";
+
+	private String deleteHardWare = "";
+	
+	private int gameId;
 	/**
 	 * @return gameTitle
 	 */
@@ -45,6 +52,31 @@ public class GameSearchConditionBean {
 	 */
 	public void setHardware(String hardware) {
 		this.hardware = hardware;
+	}
+	
+	public void setDeleteGameTitle(String gameTitle) {
+		this.deleteGameTitle = gameTitle;
+	}
+	
+	public String getDeleteGameTitle() {
+		return deleteGameTitle;
+	}
+	
+	public String getDeletehardware() {
+		return deleteHardWare;
+	}
+	
+	public void setDeletehardware(String hardware) {
+		this.deleteHardWare = hardware;
+	}
+
+	public void setGameId(int a) {
+		// TODO 自動生成されたメソッド・スタブ
+		this.gameId=a;
+	}
+	
+	public int getGameId(){
+		return gameId;
 	}
 	
 }
